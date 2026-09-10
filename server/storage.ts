@@ -3,8 +3,10 @@ import path from 'path';
 import crypto from 'crypto';
 import type { MonitoredUrl, Snapshot, ChangeRecord, EmailNotificationLog, AppSettings } from '../src/types.js';
 
-const DATA_DIR = path.resolve(process.cwd(), 'data');
+const IS_VERCEL = Boolean(process.env.VERCEL);
+const DATA_DIR = IS_VERCEL ? path.join('/tmp', 'data') : path.resolve(process.cwd(), 'data');
 const DB_FILE = path.join(DATA_DIR, 'db.json');
+const BUNDLED_DB_FILE = path.resolve(process.cwd(), 'data', 'db.json');
 
 interface DatabaseSchema {
   monitors: MonitoredUrl[];
@@ -90,6 +92,14 @@ function initDb(): DatabaseSchema {
   try {
     if (!fs.existsSync(DATA_DIR)) {
       fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+    // Si estamos en Vercel y /tmp/data/db.json aún no existe, copiamos el db.json inicial empaquetado
+    if (IS_VERCEL && !fs.existsSync(DB_FILE) && fs.existsSync(BUNDLED_DB_FILE)) {
+      try {
+        fs.copyFileSync(BUNDLED_DB_FILE, DB_FILE);
+      } catch (copyErr) {
+        console.warn('[Storage] No se pudo copiar db.json empaquetado a /tmp/data/db.json:', copyErr);
+      }
     }
     if (fs.existsSync(DB_FILE)) {
       const raw = fs.readFileSync(DB_FILE, 'utf-8').replace(/^\uFEFF/, '').trim();

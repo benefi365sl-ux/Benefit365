@@ -31,7 +31,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
   const [isSaving, setIsSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [saveError, setSaveError] = useState('');
-  const [activeHostTab, setActiveHostTab] = useState<'docker' | 'vps' | 'render' | 'cron'>('docker');
+  const [activeHostTab, setActiveHostTab] = useState<'docker' | 'vps' | 'render' | 'vercel' | 'cron'>('docker');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   const copyToClipboard = (text: string, key: string) => {
@@ -365,6 +365,17 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               </button>
               <button
                 type="button"
+                onClick={() => setActiveHostTab('vercel')}
+                className={`pb-2 px-2 border-b-2 cursor-pointer transition-colors ${
+                  activeHostTab === 'vercel'
+                    ? 'border-blue-600 text-blue-600 font-semibold'
+                    : 'border-transparent text-slate-500 hover:text-slate-800'
+                }`}
+              >
+                Vercel
+              </button>
+              <button
+                type="button"
                 onClick={() => setActiveHostTab('cron')}
                 className={`pb-2 px-2 border-b-2 cursor-pointer transition-colors ${
                   activeHostTab === 'cron'
@@ -437,6 +448,42 @@ pm2 startup && pm2 save`}
                   <li><strong>Puerto:</strong> 3000</li>
                   <li><strong>Variables de entorno:</strong> <code className="font-mono">ALERT_EMAIL_TO=benefi365sl@gmail.com</code></li>
                 </ul>
+              </div>
+            )}
+
+            {activeHostTab === 'vercel' && (
+              <div className="space-y-3 text-xs">
+                <p className="text-slate-600">
+                  El proyecto ya incluye <code className="bg-slate-100 px-1 rounded font-mono">vercel.json</code> y la función Serverless <code className="bg-slate-100 px-1 rounded font-mono">api/index.ts</code> configurados:
+                </p>
+                <div className="relative">
+                  <pre className="bg-slate-900 text-slate-200 p-3 rounded-xl font-mono text-[11px] overflow-x-auto">
+{`# 1. Desplegar mediante Vercel CLI (o conecta tu repositorio en vercel.com):
+vercel
+
+# 2. Despliegue en producción:
+vercel --prod`}
+                  </pre>
+                  <button
+                    type="button"
+                    onClick={() => copyToClipboard('vercel --prod', 'cmd-vercel')}
+                    className="absolute top-2 right-2 p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded cursor-pointer"
+                  >
+                    {copiedKey === 'cmd-vercel' ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  </button>
+                </div>
+                <div className="space-y-1.5 text-[11px] text-slate-600 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                  <div className="font-semibold text-slate-800">Variables en Vercel Dashboard (Project Settings → Environment Variables):</div>
+                  <ul className="list-disc pl-4 space-y-1">
+                    <li><code className="font-mono text-slate-800">ALERT_EMAIL_TO</code>: Tu correo destinatario de alertas.</li>
+                    <li><code className="font-mono text-slate-800">SMTP_HOST</code>, <code className="font-mono text-slate-800">SMTP_USER</code>, <code className="font-mono text-slate-800">SMTP_PASS</code>: Credenciales de envío de correo.</li>
+                    <li><code className="font-mono text-slate-800">CRON_SECRET</code>: Clave secreta para autorizar Vercel Cron Jobs.</li>
+                    <li><code className="font-mono text-slate-800">GEMINI_API_KEY</code>: (Opcional) Clave para resúmenes automáticos con IA.</li>
+                  </ul>
+                  <div className="pt-2 text-[10px] text-amber-700 font-medium">
+                    ⚠️ Nota: En Vercel Serverless las instancias son efímeras (/tmp temporal). Las revisiones programadas diarias se ejecutan mediante Vercel Cron llamando a <code className="font-mono">/api/cron/run</code>. Para persistencia permanente de capturas sin límite de tiempo, se recomienda Docker/VPS o una BD externa.
+                  </div>
+                </div>
               </div>
             )}
 

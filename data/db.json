@@ -8,10 +8,10 @@
       "checkFrequency": "daily",
       "createdAt": "2026-09-10T05:05:47.864Z",
       "stats": {
-        "totalChecks": 2,
+        "totalChecks": 3,
         "totalChanges": 0
       },
-      "lastCheckedAt": "2026-09-10T05:13:16.374Z",
+      "lastCheckedAt": "2026-09-10T05:54:27.769Z",
       "lastStatus": "ok",
       "lastSnapshotId": "snap-1789016752945-lz5g"
     },
@@ -23,9 +23,12 @@
       "checkFrequency": "daily",
       "createdAt": "2026-09-10T05:05:47.864Z",
       "stats": {
-        "totalChecks": 0,
+        "totalChecks": 1,
         "totalChanges": 0
-      }
+      },
+      "lastCheckedAt": "2026-09-10T05:54:29.090Z",
+      "lastStatus": "ok",
+      "lastSnapshotId": "snap-1789019669090-ud3j"
     },
     {
       "id": "url-3",
@@ -35,9 +38,12 @@
       "checkFrequency": "daily",
       "createdAt": "2026-09-10T05:05:47.864Z",
       "stats": {
-        "totalChecks": 0,
+        "totalChecks": 1,
         "totalChanges": 0
-      }
+      },
+      "lastCheckedAt": "2026-09-10T05:54:29.993Z",
+      "lastStatus": "ok",
+      "lastSnapshotId": "snap-1789019669993-mdj0"
     },
     {
       "id": "url-4",
@@ -47,9 +53,12 @@
       "checkFrequency": "daily",
       "createdAt": "2026-09-10T05:05:47.864Z",
       "stats": {
-        "totalChecks": 0,
+        "totalChecks": 1,
         "totalChanges": 0
-      }
+      },
+      "lastCheckedAt": "2026-09-10T05:54:30.846Z",
+      "lastStatus": "error",
+      "lastErrorMessage": "HTTP 403 Forbidden"
     },
     {
       "id": "url-5",
@@ -59,9 +68,12 @@
       "checkFrequency": "daily",
       "createdAt": "2026-09-10T05:05:47.864Z",
       "stats": {
-        "totalChecks": 0,
+        "totalChecks": 1,
         "totalChanges": 0
-      }
+      },
+      "lastCheckedAt": "2026-09-10T05:54:32.170Z",
+      "lastStatus": "ok",
+      "lastSnapshotId": "snap-1789019672169-lxfy"
     },
     {
       "id": "url-6",
@@ -71,9 +83,12 @@
       "checkFrequency": "daily",
       "createdAt": "2026-09-10T05:05:47.864Z",
       "stats": {
-        "totalChecks": 0,
+        "totalChecks": 1,
         "totalChanges": 0
-      }
+      },
+      "lastCheckedAt": "2026-09-10T05:54:33.525Z",
+      "lastStatus": "ok",
+      "lastSnapshotId": "snap-1789019673524-4lwh"
     },
     {
       "id": "url-1789019050240-o171",
@@ -83,10 +98,10 @@
       "checkFrequency": "daily",
       "createdAt": "2026-09-10T05:44:10.240Z",
       "stats": {
-        "totalChecks": 1,
+        "totalChecks": 2,
         "totalChanges": 0
       },
-      "lastCheckedAt": "2026-09-10T05:44:10.328Z",
+      "lastCheckedAt": "2026-09-10T05:54:34.616Z",
       "lastStatus": "ok",
       "lastSnapshotId": "snap-1789019050327-hsc7"
     },
@@ -98,10 +113,10 @@
       "checkFrequency": "daily",
       "createdAt": "2026-09-10T05:45:50.269Z",
       "stats": {
-        "totalChecks": 1,
+        "totalChecks": 2,
         "totalChanges": 0
       },
-      "lastCheckedAt": "2026-09-10T05:45:50.312Z",
+      "lastCheckedAt": "2026-09-10T05:54:35.433Z",
       "lastStatus": "ok",
       "lastSnapshotId": "snap-1789019150312-67z4"
     },
@@ -113,9 +128,12 @@
       "checkFrequency": "daily",
       "createdAt": "2026-09-10T05:45:52.608Z",
       "stats": {
-        "totalChecks": 0,
+        "totalChecks": 1,
         "totalChanges": 0
-      }
+      },
+      "lastCheckedAt": "2026-09-10T05:54:36.622Z",
+      "lastStatus": "ok",
+      "lastSnapshotId": "snap-1789019676622-e0c8"
     },
     {
       "id": "url-1789019152608-v3f9",
@@ -125,9 +143,12 @@
       "checkFrequency": "daily",
       "createdAt": "2026-09-10T05:45:52.608Z",
       "stats": {
-        "totalChecks": 0,
+        "totalChecks": 1,
         "totalChanges": 0
-      }
+      },
+      "lastCheckedAt": "2026-09-10T05:54:37.713Z",
+      "lastStatus": "error",
+      "lastErrorMessage": "HTTP 403 Forbidden"
     },
     {
       "id": "url-1789019320622-j4mw",
@@ -137,10 +158,10 @@
       "checkFrequency": "daily",
       "createdAt": "2026-09-10T05:48:40.622Z",
       "stats": {
-        "totalChecks": 1,
+        "totalChecks": 2,
         "totalChanges": 0
       },
-      "lastCheckedAt": "2026-09-10T05:48:40.860Z",
+      "lastCheckedAt": "2026-09-10T05:54:38.647Z",
       "lastStatus": "ok",
       "lastSnapshotId": "snap-1789019320859-kg3t"
     },
@@ -152,9 +173,12 @@
       "checkFrequency": "daily",
       "createdAt": "2026-09-10T05:48:43.983Z",
       "stats": {
-        "totalChecks": 0,
+        "totalChecks": 1,
         "totalChanges": 0
-      }
+      },
+      "lastCheckedAt": "2026-09-10T05:54:39.726Z",
+      "lastStatus": "error",
+      "lastErrorMessage": "HTTP 403 Forbidden"
     },
     {
       "id": "url-1789019323984-lwek",
@@ -164,12 +188,87 @@
       "checkFrequency": "daily",
       "createdAt": "2026-09-10T05:48:43.984Z",
       "stats": {
-        "totalChecks": 0,
+        "totalChecks": 1,
         "totalChanges": 0
-      }
+      },
+      "lastCheckedAt": "2026-09-10T05:54:40.704Z",
+      "lastStatus": "ok",
+      "lastSnapshotId": "snap-1789019680703-9fsb"
     }
   ],
   "snapshots": [
+    {
+      "id": "snap-1789019680703-9fsb",
+      "urlId": "url-1789019323984-lwek",
+      "url": "https://github.com/",
+      "timestamp": "2026-09-10T05:54:40.703Z",
+      "title": "GitHub · Change is constant. GitHub keeps you ahead. · GitHub",
+      "contentHash": "0a4d474502505ac5b3f11cad1b4127dc70654f49e2722bedc9331d8984da6e4a",
+      "textContent": "Navigation Menu\nThe future of building happens together\nTools and trends evolve, but collaboration endures. With GitHub, developers, agents, and code come together on one platform.\nGitHub features\nA demonstration animation of a code editor using GitHub Copilot Chat, where the user requests GitHub Copilot to refactor duplicated logic and extract it into a reusable function for a given code snippet.\nWrite, test, and fix code quickly with GitHub Copilot, from simple boilerplate to complex features.\nGitHub customers\nAccelerate your entire workflow\nA Copilot chat window with the 'Ask' mode enabled. The user switches from 'Ask' mode to 'Agent' mode from a dropdown menu, then sends the prompt 'Update the website to allow searching for running races by name.' Copilot analyzes the codebase, then explains the required edits for three files before generating them. Copilot then confirms completion and summarizes the implemented changes for the new functionality allowing users to search races by name and view paginated, filtered results.\nAutomate your path to production\nCode instantly from anywhere\nKeep momentum on the go\nShape your toolchain\nBuilt-in application security where found means fixed\nApply fixes in seconds.\n70% MTTR reduction\n8.3M secret leaks stopped\nWork together, achieve more\nKeep track of your tasks\nShare ideas and ask questions\nReview code changes together\nFund open source projects\nFrom startups to enterprises,\nFigma streamlines development and strengthens security\nMercedes-Benz standardizes source code and automates onboarding\nMercado Libre cuts coding time by 50%\nMillions of developers and businesses call GitHub home\nWhether you’re scaling your development process or just learning how to code, GitHub is where you belong. Join the world’s most widely adopted developer platform to build the technologies that shape what’s next.\nSite-wide Links\nThe developer newsletter\nGet tips, technical guides, and best practices. Twice a month. Right in your inbox.\nPlatform\nEcosystem\nSupport\nCompany\nYou can’t perform that action at this time.",
+      "documents": [],
+      "httpStatus": 200,
+      "byteSize": 575870
+    },
+    {
+      "id": "snap-1789019676622-e0c8",
+      "urlId": "url-1789019152608-x6tj",
+      "url": "https://example1.com/",
+      "timestamp": "2026-09-10T05:54:36.622Z",
+      "title": "Example 1",
+      "contentHash": "dde16785a4111949370073b6623dfe5e8d7b07e2298ed1def3b9b2183d3d03e3",
+      "textContent": "Example\nFrom The Collaborative International Dictionary of English v.0.48 : \n Example \\Ex*am\"ple\\, n. [A later form for ensample, fr. L.\n exemplum, orig., what is taken out of a larger quantity, as a\n sample, from eximere to take out. See Exempt, and cf.\n Ensample, Sample.]\n 1. One or a portion taken to show the character or quality of\n the whole; a sample; a specimen.\n [1913 Webster]\n 2. That which is to be followed or imitated as a model; a\n pattern or copy.\n [1913 Webster]\n For I have given you an example, that ye should do\n as I have done to you. --John xiii.\n 15.\n [1913 Webster]\n I gave, thou sayest, the example; I led the way.\n --Milton.\n [1913 Webster]\n 3. That which resembles or corresponds with something else; a\n precedent; a model.\n [1913 Webster]\n Such temperate order in so fierce a cause\n Doth want example. --Shak.\n [1913 Webster]\n 4. That which is to be avoided; one selected for punishment\n and to serve as a warning; a warning.\n [1913 Webster]\n Hang him; he'll be made an example. --Shak.\n [1913 Webster]\n Now these things were our examples, to the intent\n that we should not lust after evil things, as they\n also lusted. --1 Cor. x. 6.\n [1913 Webster]\n 5. An instance serving for illustration of a rule or precept,\n especially a problem to be solved, or a case to be\n determined, as an exercise in the application of the rules\n of any study or branch of science; as, in trigonometry and\n grammar, the principles and rules are illustrated by\n examples.\n Syn: Precedent; case; instance.\n Usage: Example, Instance. The discrimination to be made\n between these two words relates to cases in which we\n give \"instances\" or \"examples\" of things done. An\n instance denotes the single case then \"standing\"\n before us; if there be others like it, the word does\n not express this fact. On the contrary, an example is\n one of an entire class of like things, and should be a\n true representative or sample of that class. Hence, an\n example proves a rule or regular course of things; an\n instance simply points out what may be true only in\n the case presented. A man's life may be filled up with\n examples of the self-command and kindness which marked\n his character, and may present only a solitary\n instance of haste or severity. Hence, the word\n \"example\" should never be used to describe what stands\n singly and alone. We do, however, sometimes apply the\n word instance to what is really an example, because we\n are not thinking of the latter under this aspect, but\n solely as a case which \"stands before us.\" See\n Precedent.\n [1913 Webster]\nFrom The Collaborative International Dictionary of English v.0.48 : \n Example \\Ex*am\"ple\\, v. t. [imp. & p. p. Exampled; p. pr. &\n vb. n. Exampling.]\n To set an example for; to give a precedent for; to exemplify;\n to give an instance of; to instance. [Obs.] \"I may example my\n digression by some mighty precedent.\" --Shak.\n [1913 Webster]\n Burke devoted himself to this duty with a fervid\n assiduity that has not often been exampled, and has\n never been surpassed. --J. Morley.\n [1913 Webster]\nFrom WordNet (r) 2.0 : \n example\n n 1: an item of information that is representative of a type;\n \"this patient provides a typical example of the\n syndrome\"; \"there is an example on page 10\" [syn: illustration,\n instance, representative]\n 2: a representative form or pattern; \"I profited from his\n example\" [syn: model]\n 3: something to be imitated; \"an exemplar of success\"; \"a model\n of clarity\"; \"he is the very model of a modern major\n general\" [syn: exemplar, model, good example]\n 4: punishment intended as a warning to others; \"they decided to\n make an example of him\" [syn: deterrent example, lesson,\n object lesson]\n 5: an occurrence of something; \"it was a case of bad judgment\";\n \"another instance occurred yesterday\"; \"but there is\n always the famous example of the Smiths\" [syn: case, instance]\n 6: a task performed or problem solved in order to develop skill\n or understanding; \"you must work the examples at the end\n of each chapter in the textbook\" [syn: exercise]\n Sample Usage: Examples of actresses I like: Julia Roberts,\n Sandra Bullock\nExample1 HOSTGATOR",
+      "documents": [],
+      "httpStatus": 200,
+      "byteSize": 5203
+    },
+    {
+      "id": "snap-1789019673524-4lwh",
+      "urlId": "url-6",
+      "url": "https://nodejs.org/en/blog",
+      "timestamp": "2026-09-10T05:54:33.524Z",
+      "title": "Node.js — Blog",
+      "contentHash": "a638301a19ffdadcd46757430c3771817926420e4f16cf7c1ce822cde6aaa244",
+      "textContent": "Start typing...\nBlog\nThe latest Node.js news, migration guides and events summaries\nNode.js 26.8.2 (Current)\nAntoine du Hamel\nNode.js 24.21.0 (LTS)\nAntoine du Hamel\nNode.js 26.8.1 (Current)\nAntoine du Hamel\nNode.js 26.8.0 (Current)\nAntoine du Hamel\nNode.js 24.20.0 (LTS)\nAntoine du Hamel\nNode.js Interactive 2026: A Recap\nAviv Keller\nCopyright and Node.js contributors. All rights reserved. The has registered trademarks and uses trademarks. For a list of trademarks of the , please see our and . Trademarks and logos not indicated on the are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.",
+      "documents": [],
+      "httpStatus": 200,
+      "byteSize": 829032
+    },
+    {
+      "id": "snap-1789019672169-lxfy",
+      "urlId": "url-5",
+      "url": "https://blog.google/technology/ai/",
+      "timestamp": "2026-09-10T05:54:32.169Z",
+      "title": "Official Google AI news and updates | Google Blog",
+      "contentHash": "ea465ff627a1ff9f5603568407b3c8d8c168bd1184bf6e9c5acea4f48fb2475d",
+      "textContent": "Innovation & AI\nLearn more:\nProducts & platforms\nLearn more:\nCompany news\nLearn more:\nInnovation & AI\nModels & Research\nProducts\nInfrastructure & cloud\nTechnology\nLearn more:\nProducts & platforms\nProducts\nPlatforms\nDevices\nLearn more:\nCompany news\nOutreach & initiatives\nLeadership\nInside Google\nLearn more:\nThe work we're doing to make AI helpful for everyone.\nFollow Us\nI/O 2026: Welcome to the agentic Gemini era\nThe latest from Google I/O: See how we’re helping you get more done with Gemini.\nGemini App\nCreate your best tracks yet with Lyria 3.5 in Gemini.\nTurn your voice into action with new productivity features in Gemini Live\nHere’s how to use intelligent dictation in Gemini for macOS.\nResearch\nMapping global methane emissions from space with deep learning\nOur new contrail avoidance trial in Asia-Pacific\n5 amazing visuals show how the male fruit fly’s brain map is advancing neuroscience\nDevelopers\nPairing Google Antigravity with Gemini 3.7 Flash solves notable multi-agent math and engineering problems.\nGemini Omni 1.1 Flash lets you build with more control\nHow developers build AI for good with Gemma 4\nAll the Latest",
+      "documents": [],
+      "httpStatus": 200,
+      "byteSize": 405862
+    },
+    {
+      "id": "snap-1789019669993-mdj0",
+      "urlId": "url-3",
+      "url": "https://ec.europa.eu/commission/presscorner/home/en",
+      "timestamp": "2026-09-10T05:54:29.993Z",
+      "title": "Press corner | European Commission",
+      "contentHash": "7937d1c3f5703a387aee183ae37715f484cf7d2346a5d7acc0cf67a546a95a1b",
+      "textContent": "",
+      "documents": [],
+      "httpStatus": 200,
+      "byteSize": 21533
+    },
+    {
+      "id": "snap-1789019669090-ud3j",
+      "urlId": "url-2",
+      "url": "https://news.ycombinator.com",
+      "timestamp": "2026-09-10T05:54:29.090Z",
+      "title": "Hacker News",
+      "contentHash": "c5af32ac181c4c717e7054cb8ae810dd77beeb13b7ae4fe56984b6d2a12f2565",
+      "textContent": "Hacker Newsnew | past | comments | ask | show | jobs | submitlogin1.iPhone Duo (apple.com)1076 points by thecosmicfrog 11 hours ago | hide | 1910 comments2.Show HN: What if the speed of light was 5 km/h? (dmitrybrant.com)165 points by dmitrybrant 3 hours ago | hide | 74 comments3.ESP32 Bit Pirate Hardware Hacking Kit with Web Tools That Speaks Every Protocol (geo-tp.github.io)51 points by geotp 2 hours ago | hide | 3 comments4.Version Control Second Coming (psantosl.github.io)25 points by bananaboy 1 hour ago | hide | 1 comment5.Shopify acquires Tailwind (tailwindcss.com)974 points by EdwinHoksberg 16 hours ago | hide | 382 comments6.What do Visa and Mastercard do? An intro to card networks (tautology.town)464 points by evakhoury 13 hours ago | hide | 255 comments7.Growing proof that autonomous cars save lives (ieee.org)303 points by bookofjoe 12 hours ago | hide | 496 comments8.Training a 3.8B LLM to 0.384 CORE for $998 – Hugo Vergnes (hugovergnes.github.io)39 points by Anon84 3 hours ago | hide | 6 comments9.All grown-ups were once children… but only few of them remember it (mathstodon.xyz)10 points by yurivish 1 hour ago | hide | discuss10.Show HN: Compute polynomials twice as fast (thomasahle.com)55 points by thomasahle 4 hours ago | hide | 10 comments11.AirPods 5 (apple.com)425 points by awad 12 hours ago | hide | 333 comments12.No Man's Sky Cosmos (nomanssky.com)344 points by Limb 14 hours ago | hide | 357 comments13.GPT-6 Astra, looped transformers, and hidden reasoning (sebastianraschka.com)386 points by ModelForge 15 hours ago | hide | 131 comments14.iPhone 18 Pro and iPhone 18 Pro Max (apple.com)332 points by meetpateltech 12 hours ago | hide | 352 comments15.Automattic's board forces CEO Matt Mullenweg into leave of absence (techcrunch.com)166 points by LeoPanthera 6 hours ago | hide | 146 comments16.A Stupid Idea for AI Alignment We Came with by Looking at Specification Gaming (slimemoldtimemold.com)40 points by cpeterso 3 hours ago | hide | 25 comments17.Factoring RSA 260 (cognition.com)74 points by samyok 6 hours ago | hide | 9 comments18.Qwen 3.8 follows GPT-5.5 Pro reasoning prefills (gist.github.com)199 points by wsxiaoys 12 hours ago | hide | 78 comments19.Desert Ant Labs: local, fast models that run on device (desertant.com)426 points by willwhitedc 18 hours ago | hide | 93 comments20.Apple Watch Series 12 (apple.com)245 points by Lealen 11 hours ago | hide | 291 comments21.Aardman (Wallace and Gromit) Is Selling Its Original Movie Puppets (gizmodo.com)24 points by Gaishan 5 hours ago | hide | 7 comments22.Rivian's gambit for full autonomy (ieee.org)63 points by 1970-01-01 10 hours ago | hide | 76 comments23.GNU Radio in the browser (gnuradioworld.com)191 points by kristianpaul 14 hours ago | hide | 24 comments24.How I advertise malicious software on Google Ads (xlii.space)382 points by xlii 18 hours ago | hide | 225 comments25.The UN challenges five centuries of cartography (not-ship.com)73 points by speckx 13 hours ago | hide | 118 comments26.Understanding the recent DDoS attack against Read the Docs (readthedocs.com)180 points by davidfischer 13 hours ago | hide | 58 comments27.Planet Labs' open satellite feed (marksblogg.com)163 points by marklit 14 hours ago | hide | 28 comments28.The Kuycon P20 – 28\" 4500x3000px 3:2 monitor (taoofmac.com)39 points by zdw 7 hours ago | hide | 31 comments29.Blizzard Workers Win Historic Union Contract (gamespot.com)166 points by dbg31415 7 hours ago | hide | 52 comments30.Bespoke: A programming language for people who say please (hofstede.it)153 points by birdculture 14 hours ago | hide | 38 commentsMore\nGuidelines | FAQ | Lists | API | Security | Legal | Apply to YC | Contact\nSearch:",
+      "documents": [],
+      "httpStatus": 200,
+      "byteSize": 34837
+    },
     {
       "id": "snap-1789019320859-kg3t",
       "urlId": "url-1789019320622-j4mw",

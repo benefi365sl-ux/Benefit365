@@ -5,6 +5,11 @@ import { checkAllMonitors } from './checker.js';
 let activeCronTask: ScheduledTask | null = null;
 
 export function initScheduler() {
+  if (process.env.VERCEL) {
+    console.log('[Scheduler] Entorno Serverless (Vercel) detectado: el cron se gestiona mediante Vercel Cron Jobs (/api/cron/run).');
+    return;
+  }
+
   const settings = Storage.getSettings();
 
   if (activeCronTask) {
