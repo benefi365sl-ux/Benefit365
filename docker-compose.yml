@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  web-change-monitor:
+    build: .
+    container_name: web-change-monitor
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - ALERT_EMAIL_TO=benefi365sl@gmail.com
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_SECURE=false
+      - SMTP_USER=
+      - SMTP_PASS=
+      - CRON_SCHEDULE=0 8 * * *
+      # Opcional para resúmenes con IA:
+      # - GEMINI_API_KEY=tu_api_key
+    volumes:
+      - ./data:/app/data

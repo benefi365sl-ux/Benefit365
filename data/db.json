@@ -1,0 +1,119 @@
+{
+  "monitors": [
+    {
+      "id": "url-1",
+      "url": "https://www.boe.es/diario_boe/",
+      "label": "BOE - Boletín Oficial del Estado (España)",
+      "enabled": true,
+      "checkFrequency": "daily",
+      "createdAt": "2026-09-10T05:05:47.864Z",
+      "stats": {
+        "totalChecks": 1,
+        "totalChanges": 0
+      },
+      "lastCheckedAt": "2026-09-10T05:05:52.945Z",
+      "lastStatus": "ok",
+      "lastSnapshotId": "snap-1789016752945-lz5g"
+    },
+    {
+      "id": "url-2",
+      "url": "https://news.ycombinator.com",
+      "label": "Hacker News (Frontpage updates)",
+      "enabled": true,
+      "checkFrequency": "daily",
+      "createdAt": "2026-09-10T05:05:47.864Z",
+      "stats": {
+        "totalChecks": 0,
+        "totalChanges": 0
+      }
+    },
+    {
+      "id": "url-3",
+      "url": "https://ec.europa.eu/commission/presscorner/home/en",
+      "label": "European Commission - Press & Policy Documents",
+      "enabled": true,
+      "checkFrequency": "daily",
+      "createdAt": "2026-09-10T05:05:47.864Z",
+      "stats": {
+        "totalChecks": 0,
+        "totalChanges": 0
+      }
+    },
+    {
+      "id": "url-4",
+      "url": "https://www.w3.org/standards/news/",
+      "label": "W3C World Wide Web Standards & Tech News",
+      "enabled": true,
+      "checkFrequency": "daily",
+      "createdAt": "2026-09-10T05:05:47.864Z",
+      "stats": {
+        "totalChecks": 0,
+        "totalChanges": 0
+      }
+    },
+    {
+      "id": "url-5",
+      "url": "https://blog.google/technology/ai/",
+      "label": "Google The Keyword - AI News & Research",
+      "enabled": true,
+      "checkFrequency": "daily",
+      "createdAt": "2026-09-10T05:05:47.864Z",
+      "stats": {
+        "totalChecks": 0,
+        "totalChanges": 0
+      }
+    },
+    {
+      "id": "url-6",
+      "url": "https://nodejs.org/en/blog",
+      "label": "Node.js Official Releases & Security Updates",
+      "enabled": true,
+      "checkFrequency": "daily",
+      "createdAt": "2026-09-10T05:05:47.864Z",
+      "stats": {
+        "totalChecks": 0,
+        "totalChanges": 0
+      }
+    }
+  ],
+  "snapshots": [
+    {
+      "id": "snap-1789016752945-lz5g",
+      "urlId": "url-1",
+      "url": "https://www.boe.es/diario_boe/",
+      "timestamp": "2026-09-10T05:05:52.945Z",
+      "title": "BOE.es - BOE de Septiembre de 2026",
+      "contentHash": "46a1f9b21519080bc6b6907d87ff53cfe61f30f61b61e11428fd9debe7f2b9ea",
+      "textContent": "Agencia Estatal Boletín Oficial del Estado\nPuede seleccionar otro idioma:\nBOE (Diario oficial Boletín Oficial del Estado)\nBOE. Diario oficial\nCalendario\nBuscar por fecha\nSuplementos\nSuplementos en , , ,\nSección del\nSuplementos en\nSección del\nAgencia Estatal Boletín Oficial del Estado\nde Manoteras, 54 - 28050 Madrid",
+      "documents": [],
+      "httpStatus": 200,
+      "byteSize": 18940
+    }
+  ],
+  "changes": [],
+  "emailLogs": [
+    {
+      "id": "test-1789016756515",
+      "timestamp": "2026-09-10T05:05:56.515Z",
+      "recipient": "benefi365sl@gmail.com",
+      "subject": "[Prueba] Verificación de alertas - Web Change Monitor (5:05:56)",
+      "previewHtml": "\n    <div style=\"font-family: sans-serif; padding: 24px; color: #1e293b;\">\n      <h2 style=\"color: #0284c7;\">✅ Configuración de Alertas Comprobada</h2>\n      <p>Este es un correo de prueba enviado desde tu aplicación <strong>Web Change Monitor</strong>.</p>\n      <p>Tu sistema de monitorización diaria enviará alertas a esta dirección <strong>únicamente cuando se detecten cambios de texto o nuevos documentos PDF</strong> en las URLs observadas.</p>\n      <hr style=\"border: none; border-top: 1px solid #e2e8f0; margin: 20px 0;\" />\n      <div style=\"font-size: 12px; color: #64748b;\">\n        Fecha de envío: 10/9/2026, 5:05:56\n      </div>\n    </div>\n  ",
+      "status": "simulated",
+      "errorMessage": "SMTP no configurado. Mensaje de prueba registrado en la bandeja de previsualización."
+    }
+  ],
+  "settings": {
+    "alertEmail": "benefi365sl@gmail.com",
+    "smtpHost": "smtp.gmail.com",
+    "smtpPort": 587,
+    "smtpSecure": false,
+    "smtpUser": "",
+    "smtpPass": "",
+    "smtpFrom": "Web Change Monitor <no-reply@monitor.local>",
+    "cronSchedule": "0 8 * * *",
+    "cronEnabled": true,
+    "onlyAlertOnChanges": true,
+    "useGeminiSummary": true,
+    "cronSecretToken": "7378d5ab474c67705adcdeb0492169f0"
+  }
+}

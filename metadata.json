@@ -1,0 +1,6 @@
+{
+  "name": "Web Change Monitor & Email Alerts",
+  "description": "Monitor automático diario de cambios en páginas web (textos y documentos PDF) con alertas por correo electrónico solo cuando hay cambios.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
