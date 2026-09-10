@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
 import { Storage } from './server/storage.js';
 import { checkSingleUrl, checkAllMonitors } from './server/checker.js';
@@ -10,6 +11,17 @@ import { initScheduler } from './server/scheduler.js';
 async function startServer() {
   const app = express();
   const PORT = 3000;
+
+  // CORS headers for cross-origin hosting or reverse proxies
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    if (req.method === 'OPTIONS') {
+      return res.sendStatus(200);
+    }
+    next();
+  });
 
   app.use(express.json({ limit: '2mb' }));
 
@@ -290,8 +302,15 @@ async function startServer() {
   // Start internal automated scheduler
   initScheduler();
 
+  // Determine if running in production mode:
+  // True if NODE_ENV=production, or running compiled .cjs bundle, or when src/main.tsx is absent (production image)
+  const isProduction =
+    process.env.NODE_ENV === 'production' ||
+    (typeof __filename !== 'undefined' && __filename.endsWith('.cjs')) ||
+    !fs.existsSync(path.join(process.cwd(), 'src', 'main.tsx'));
+
   // Vite development middleware or production static serving
-  if (process.env.NODE_ENV !== 'production') {
+  if (!isProduction) {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: 'spa',
@@ -299,10 +318,17 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
-    });
+    if (fs.existsSync(distPath)) {
+      app.use(express.static(distPath));
+      app.get('*', (req, res) => {
+        const indexPath = path.join(distPath, 'index.html');
+        if (fs.existsSync(indexPath)) {
+          res.sendFile(indexPath);
+        } else {
+          res.status(404).send('Not Found: dist/index.html. Run npm run build.');
+        }
+      });
+    }
   }
 
   app.listen(PORT, '0.0.0.0', () => {
