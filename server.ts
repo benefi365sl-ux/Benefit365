@@ -13,6 +13,14 @@ async function startServer() {
 
   app.use(express.json({ limit: '2mb' }));
 
+  // Handle invalid JSON body syntax errors (e.g. malformed JSON in POST body)
+  app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    if (err instanceof SyntaxError && 'body' in err) {
+      return res.status(400).json({ error: 'Cuerpo de la petición JSON no válido o mal formado.' });
+    }
+    next(err);
+  });
+
   // API Routes
   app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
@@ -259,6 +267,24 @@ async function startServer() {
     } catch (err: any) {
       return res.status(500).json({ error: err.message });
     }
+  });
+
+  // PREVENT FALLTHROUGH: Ensure all /api and /api/* routes that don't match return JSON 404, never Vite HTML
+  app.all(['/api', '/api/*'], (req, res) => {
+    res.status(404).json({
+      error: `Ruta de API no encontrada: ${req.method} ${req.originalUrl || req.path}`,
+    });
+  });
+
+  // API Error Handler: Ensure any uncaught API error returns clean JSON, never HTML
+  app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    if (req.path.startsWith('/api')) {
+      console.error('[API Server Error]:', err);
+      return res.status(err.status || 500).json({
+        error: err.message || 'Error interno del servidor',
+      });
+    }
+    next(err);
   });
 
   // Start internal automated scheduler

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, Search, FileText, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { apiFetch } from '../lib/api.ts';
 import type { MonitoredUrl } from '../types.ts';
 
 interface AddMonitorModalProps {
@@ -56,15 +57,14 @@ export const AddMonitorModal: React.FC<AddMonitorModalProps> = ({
     setTestResult(null);
 
     try {
-      const res = await fetch('/api/test-url', {
+      const res = await apiFetch<any>('/api/test-url', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: url.trim(), selector: selector.trim() || undefined }),
       });
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || 'Error al conectar con la URL');
+      if (!res.ok || !res.data) {
+        throw new Error(res.error || 'Error al conectar con la URL');
       }
+      const data = res.data;
       setTestResult(data);
       if (!label && data.title) {
         setLabel(data.title.slice(0, 80));

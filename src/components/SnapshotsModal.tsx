@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, FileText, ExternalLink, Calendar, Hash, Download, CheckCircle2 } from 'lucide-react';
+import { apiFetch } from '../lib/api.ts';
 import type { MonitoredUrl, Snapshot } from '../types.ts';
 
 interface SnapshotsModalProps {
@@ -20,11 +21,11 @@ export const SnapshotsModal: React.FC<SnapshotsModalProps> = ({
   useEffect(() => {
     if (monitor && isOpen) {
       setLoading(true);
-      fetch(`/api/snapshots/${monitor.id}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setSnapshots(data || []);
-          if (data && data.length > 0) {
+      apiFetch<Snapshot[]>(`/api/snapshots/${monitor.id}`)
+        .then((res) => {
+          const data = res.ok && Array.isArray(res.data) ? res.data : [];
+          setSnapshots(data);
+          if (data.length > 0) {
             setSelectedSnapshot(data[0]);
           } else {
             setSelectedSnapshot(null);

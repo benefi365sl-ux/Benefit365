@@ -13,6 +13,7 @@ import { ChangeHistoryView } from './components/ChangeHistoryView.tsx';
 import { EmailLogsView } from './components/EmailLogsView.tsx';
 import { SnapshotsModal } from './components/SnapshotsModal.tsx';
 import { SettingsView } from './components/SettingsView.tsx';
+import { apiFetch } from './lib/api.ts';
 import type { MonitoredUrl, ChangeRecord, EmailNotificationLog, AppSettings } from './types.ts';
 
 export default function App() {
@@ -57,27 +58,23 @@ export default function App() {
   const fetchAllData = useCallback(async () => {
     try {
       const [monitorsRes, changesRes, emailRes, settingsRes] = await Promise.all([
-        fetch('/api/monitors'),
-        fetch('/api/changes'),
-        fetch('/api/email-logs'),
-        fetch('/api/settings'),
+        apiFetch<MonitoredUrl[]>('/api/monitors'),
+        apiFetch<ChangeRecord[]>('/api/changes'),
+        apiFetch<EmailNotificationLog[]>('/api/email-logs'),
+        apiFetch<AppSettings>('/api/settings'),
       ]);
 
-      if (monitorsRes.ok) {
-        const data = await monitorsRes.json();
-        setMonitors(data);
+      if (monitorsRes.ok && monitorsRes.data) {
+        setMonitors(monitorsRes.data);
       }
-      if (changesRes.ok) {
-        const data = await changesRes.json();
-        setChanges(data);
+      if (changesRes.ok && changesRes.data) {
+        setChanges(changesRes.data);
       }
-      if (emailRes.ok) {
-        const data = await emailRes.json();
-        setEmailLogs(data);
+      if (emailRes.ok && emailRes.data) {
+        setEmailLogs(emailRes.data);
       }
-      if (settingsRes.ok) {
-        const data = await settingsRes.json();
-        setSettings(data);
+      if (settingsRes.ok && settingsRes.data) {
+        setSettings(settingsRes.data);
       }
     } catch (err) {
       console.error('Error fetching dashboard data:', err);
@@ -97,10 +94,12 @@ export default function App() {
   const handleCheckSingle = async (id: string) => {
     setCheckingIds((prev) => new Set(prev).add(id));
     try {
-      const res = await fetch(`/api/monitors/${id}/check`, { method: 'POST' });
-      const result = await res.json();
-      if (!res.ok) throw new Error(result.error || 'Error al comprobar la URL');
+      const res = await apiFetch<any>(`/api/monitors/${id}/check`, { method: 'POST' });
+      if (!res.ok || !res.data) {
+        throw new Error(res.error || 'Error al comprobar la URL');
+      }
 
+      const result = res.data;
       if (result.isFirstRun) {
         showToast('Primera línea base establecida para la URL.', 'info');
       } else if (result.hasChanged) {
@@ -126,9 +125,11 @@ export default function App() {
     setIsCheckingAll(true);
     showToast('Iniciando comprobación de todas las URLs activas...', 'info');
     try {
-      const res = await fetch('/api/check-all', { method: 'POST' });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Error al ejecutar comprobación global');
+      const res = await apiFetch<any>('/api/check-all', { method: 'POST' });
+      if (!res.ok || !res.data) {
+        throw new Error(res.error || 'Error al ejecutar comprobación global');
+      }
+      const data = res.data;
 
       if (data.changesDetected > 0) {
         showToast(`Comprobación finalizada: ${data.changesDetected} páginas con cambios detectados y avisos tramitados.`, 'success');
@@ -146,9 +147,8 @@ export default function App() {
   // Toggle monitor enabled / paused
   const handleToggleEnabled = async (id: string, current: boolean) => {
     try {
-      const res = await fetch(`/api/monitors/${id}`, {
+      const res = await apiFetch(`/api/monitors/${id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ enabled: !current }),
       });
       if (res.ok) {
@@ -165,7 +165,7 @@ export default function App() {
       return;
     }
     try {
-      const res = await fetch(`/api/monitors/${id}`, { method: 'DELETE' });
+      const res = await apiFetch(`/api/monitors/${id}`, { method: 'DELETE' });
       if (res.ok) {
         showToast('URL eliminada de la monitorización.', 'info');
         await fetchAllData();
@@ -183,26 +183,22 @@ export default function App() {
     checkFrequency?: 'daily' | 'hourly';
   }) => {
     if (editingMonitor) {
-      const res = await fetch(`/api/monitors/${editingMonitor.id}`, {
+      const res = await apiFetch(`/api/monitors/${editingMonitor.id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
       if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.error || 'Error al actualizar');
+        throw new Error(res.error || 'Error al actualizar monitor');
       }
       showToast('URL actualizada con éxito.', 'success');
       setEditingMonitor(null);
     } else {
-      const res = await fetch('/api/monitors', {
+      const res = await apiFetch('/api/monitors', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
       if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.error || 'Error al guardar');
+        throw new Error(res.error || 'Error al guardar');
       }
       showToast('Nueva URL agregada. Se está generando la captura inicial en segundo plano...', 'success');
     }
@@ -211,48 +207,40 @@ export default function App() {
 
   // Batch import
   const handleBatchImport = async (urls: string[]) => {
-    const res = await fetch('/api/monitors', {
+    const res = await apiFetch<{ count: number }>('/api/monitors', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ urls }),
     });
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.error || 'Error al importar lote');
+    if (!res.ok || !res.data) {
+      throw new Error(res.error || 'Error al importar lote');
     }
-    const data = await res.json();
-    showToast(`¡Lote importado con éxito! Se añadieron ${data.count} URLs.`, 'success');
+    showToast(`¡Lote importado con éxito! Se añadieron ${res.data.count} URLs.`, 'success');
     await fetchAllData();
   };
 
   // Save Settings
   const handleSaveSettings = async (updated: Partial<AppSettings>) => {
-    const res = await fetch('/api/settings', {
+    const res = await apiFetch<AppSettings>('/api/settings', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updated),
     });
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.error || 'Error al guardar configuración');
+    if (!res.ok || !res.data) {
+      throw new Error(res.error || 'Error al guardar configuración');
     }
-    const saved = await res.json();
-    setSettings(saved);
+    setSettings(res.data);
   };
 
   // Send Test Email
   const handleSendTestEmail = async (email?: string) => {
-    const res = await fetch('/api/test-email', {
+    const res = await apiFetch<any>('/api/test-email', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email || settings.alertEmail }),
     });
-    const data = await res.json();
-    if (!res.ok) {
-      throw new Error(data.error || 'Error al enviar email de prueba');
+    if (!res.ok || !res.data) {
+      throw new Error(res.error || 'Error al enviar email de prueba');
     }
     await fetchAllData();
-    return data;
+    return res.data;
   };
 
   return (

@@ -92,15 +92,23 @@ function initDb(): DatabaseSchema {
       fs.mkdirSync(DATA_DIR, { recursive: true });
     }
     if (fs.existsSync(DB_FILE)) {
-      const raw = fs.readFileSync(DB_FILE, 'utf-8');
-      const data = JSON.parse(raw);
-      return {
-        monitors: data.monitors || DEFAULT_MONITORS,
-        snapshots: data.snapshots || [],
-        changes: data.changes || [],
-        emailLogs: data.emailLogs || [],
-        settings: { ...DEFAULT_SETTINGS, ...data.settings },
-      };
+      const raw = fs.readFileSync(DB_FILE, 'utf-8').replace(/^\uFEFF/, '').trim();
+      if (raw) {
+        try {
+          const data = JSON.parse(raw);
+          if (data && typeof data === 'object') {
+            return {
+              monitors: Array.isArray(data.monitors) ? data.monitors : DEFAULT_MONITORS,
+              snapshots: Array.isArray(data.snapshots) ? data.snapshots : [],
+              changes: Array.isArray(data.changes) ? data.changes : [],
+              emailLogs: Array.isArray(data.emailLogs) ? data.emailLogs : [],
+              settings: { ...DEFAULT_SETTINGS, ...(data.settings || {}) },
+            };
+          }
+        } catch (jsonErr) {
+          console.error('[Storage] Error al parsear JSON de db.json (carácter inesperado):', jsonErr);
+        }
+      }
     }
   } catch (err) {
     console.error('Error reading database file, resetting to defaults:', err);
@@ -124,7 +132,9 @@ function saveDb(db: DatabaseSchema) {
     if (!fs.existsSync(DATA_DIR)) {
       fs.mkdirSync(DATA_DIR, { recursive: true });
     }
-    fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2), 'utf-8');
+    const tempFile = `${DB_FILE}.${Date.now()}.${Math.random().toString(36).slice(2, 6)}.tmp`;
+    fs.writeFileSync(tempFile, JSON.stringify(db, null, 2), 'utf-8');
+    fs.renameSync(tempFile, DB_FILE);
     dbCache = db;
   } catch (err) {
     console.error('Error writing database file:', err);
