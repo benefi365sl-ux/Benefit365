@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, Search, FileText, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
-import { apiFetch } from '../lib/api.ts';
+import { apiFetch, extractErrorMessage } from '../lib/api.ts';
 import type { MonitoredUrl } from '../types.ts';
 
 interface AddMonitorModalProps {
@@ -62,7 +62,7 @@ export const AddMonitorModal: React.FC<AddMonitorModalProps> = ({
         body: JSON.stringify({ url: url.trim(), selector: selector.trim() || undefined }),
       });
       if (!res.ok || !res.data) {
-        throw new Error(res.error || 'Error al conectar con la URL');
+        throw new Error(extractErrorMessage(res.error, 'Error al conectar con la URL'));
       }
       const data = res.data;
       setTestResult(data);
@@ -70,7 +70,7 @@ export const AddMonitorModal: React.FC<AddMonitorModalProps> = ({
         setLabel(data.title.slice(0, 80));
       }
     } catch (err: any) {
-      setTestError(err.message);
+      setTestError(extractErrorMessage(err, 'Error al conectar con la URL'));
     } finally {
       setIsTesting(false);
     }
@@ -94,7 +94,7 @@ export const AddMonitorModal: React.FC<AddMonitorModalProps> = ({
       });
       onClose();
     } catch (err: any) {
-      setErrorMessage(err.message || 'Error al guardar la URL.');
+      setErrorMessage(extractErrorMessage(err, 'Error al guardar la URL.'));
     } finally {
       setIsSubmitting(false);
     }

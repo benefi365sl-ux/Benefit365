@@ -134,7 +134,15 @@ function saveDb(db: DatabaseSchema) {
     }
     const tempFile = `${DB_FILE}.${Date.now()}.${Math.random().toString(36).slice(2, 6)}.tmp`;
     fs.writeFileSync(tempFile, JSON.stringify(db, null, 2), 'utf-8');
-    fs.renameSync(tempFile, DB_FILE);
+    try {
+      fs.renameSync(tempFile, DB_FILE);
+    } catch (renameErr) {
+      // Fallback si rename atómico falla por volúmenes cruzados (EXDEV)
+      fs.copyFileSync(tempFile, DB_FILE);
+      try {
+        fs.unlinkSync(tempFile);
+      } catch {}
+    }
     dbCache = db;
   } catch (err) {
     console.error('Error writing database file:', err);

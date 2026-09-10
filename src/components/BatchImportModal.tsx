@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, Globe, Check, AlertCircle, Sparkles } from 'lucide-react';
+import { extractErrorMessage } from '../lib/api.ts';
 
 interface BatchImportModalProps {
   isOpen: boolean;
@@ -37,7 +38,7 @@ export const BatchImportModal: React.FC<BatchImportModalProps> = ({
       setRawText('');
       onClose();
     } catch (err: any) {
-      setError(err.message || 'Error al importar las URLs');
+      setError(extractErrorMessage(err, 'Error al importar las URLs'));
     } finally {
       setIsSubmitting(false);
     }

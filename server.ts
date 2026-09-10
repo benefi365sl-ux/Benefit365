@@ -18,12 +18,13 @@ async function startServer() {
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     if (req.method === 'OPTIONS') {
-      return res.sendStatus(200);
+      return res.status(204).end();
     }
     next();
   });
 
   app.use(express.json({ limit: '2mb' }));
+  app.use(express.urlencoded({ extended: true, limit: '2mb' }));
 
   // Handle invalid JSON body syntax errors (e.g. malformed JSON in POST body)
   app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -290,10 +291,16 @@ async function startServer() {
 
   // API Error Handler: Ensure any uncaught API error returns clean JSON, never HTML
   app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-    if (req.path.startsWith('/api')) {
+    if (req.path.startsWith('/api') || req.url.startsWith('/api')) {
       console.error('[API Server Error]:', err);
+      const errMsg =
+        typeof err?.message === 'string'
+          ? err.message
+          : typeof err === 'string'
+            ? err
+            : 'Error interno del servidor';
       return res.status(err.status || 500).json({
-        error: err.message || 'Error interno del servidor',
+        error: errMsg,
       });
     }
     next(err);

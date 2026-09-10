@@ -13,7 +13,7 @@ import { ChangeHistoryView } from './components/ChangeHistoryView.tsx';
 import { EmailLogsView } from './components/EmailLogsView.tsx';
 import { SnapshotsModal } from './components/SnapshotsModal.tsx';
 import { SettingsView } from './components/SettingsView.tsx';
-import { apiFetch } from './lib/api.ts';
+import { apiFetch, extractErrorMessage } from './lib/api.ts';
 import type { MonitoredUrl, ChangeRecord, EmailNotificationLog, AppSettings } from './types.ts';
 
 export default function App() {
@@ -96,7 +96,7 @@ export default function App() {
     try {
       const res = await apiFetch<any>(`/api/monitors/${id}/check`, { method: 'POST' });
       if (!res.ok || !res.data) {
-        throw new Error(res.error || 'Error al comprobar la URL');
+        throw new Error(extractErrorMessage(res.error, 'Error al comprobar la URL'));
       }
 
       const result = res.data;
@@ -109,7 +109,7 @@ export default function App() {
       }
       await fetchAllData();
     } catch (err: any) {
-      showToast('Fallo en la comprobación: ' + err.message, 'warning');
+      showToast('Fallo en la comprobación: ' + extractErrorMessage(err), 'warning');
       await fetchAllData();
     } finally {
       setCheckingIds((prev) => {
@@ -127,7 +127,7 @@ export default function App() {
     try {
       const res = await apiFetch<any>('/api/check-all', { method: 'POST' });
       if (!res.ok || !res.data) {
-        throw new Error(res.error || 'Error al ejecutar comprobación global');
+        throw new Error(extractErrorMessage(res.error, 'Error al ejecutar comprobación global'));
       }
       const data = res.data;
 
@@ -138,7 +138,7 @@ export default function App() {
       }
       await fetchAllData();
     } catch (err: any) {
-      showToast('Error en la comprobación: ' + err.message, 'warning');
+      showToast('Error en la comprobación: ' + extractErrorMessage(err), 'warning');
     } finally {
       setIsCheckingAll(false);
     }
@@ -188,7 +188,7 @@ export default function App() {
         body: JSON.stringify(data),
       });
       if (!res.ok) {
-        throw new Error(res.error || 'Error al actualizar monitor');
+        throw new Error(extractErrorMessage(res.error, 'Error al actualizar monitor'));
       }
       showToast('URL actualizada con éxito.', 'success');
       setEditingMonitor(null);
@@ -198,7 +198,7 @@ export default function App() {
         body: JSON.stringify(data),
       });
       if (!res.ok) {
-        throw new Error(res.error || 'Error al guardar');
+        throw new Error(extractErrorMessage(res.error, 'Error al guardar'));
       }
       showToast('Nueva URL agregada. Se está generando la captura inicial en segundo plano...', 'success');
     }
@@ -212,7 +212,7 @@ export default function App() {
       body: JSON.stringify({ urls }),
     });
     if (!res.ok || !res.data) {
-      throw new Error(res.error || 'Error al importar lote');
+      throw new Error(extractErrorMessage(res.error, 'Error al importar lote'));
     }
     showToast(`¡Lote importado con éxito! Se añadieron ${res.data.count} URLs.`, 'success');
     await fetchAllData();
@@ -225,7 +225,7 @@ export default function App() {
       body: JSON.stringify(updated),
     });
     if (!res.ok || !res.data) {
-      throw new Error(res.error || 'Error al guardar configuración');
+      throw new Error(extractErrorMessage(res.error, 'Error al guardar configuración'));
     }
     setSettings(res.data);
   };
@@ -237,7 +237,7 @@ export default function App() {
       body: JSON.stringify({ email: email || settings.alertEmail }),
     });
     if (!res.ok || !res.data) {
-      throw new Error(res.error || 'Error al enviar email de prueba');
+      throw new Error(extractErrorMessage(res.error, 'Error al enviar email de prueba'));
     }
     await fetchAllData();
     return res.data;

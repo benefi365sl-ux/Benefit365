@@ -11,7 +11,9 @@ import {
   ExternalLink,
   Sparkles,
   HelpCircle,
+  AlertCircle,
 } from 'lucide-react';
+import { extractErrorMessage } from '../lib/api.ts';
 import type { AppSettings } from '../types.ts';
 
 interface SettingsViewProps {
@@ -28,6 +30,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
   const [formData, setFormData] = useState<AppSettings>(settings);
   const [isSaving, setIsSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const [saveError, setSaveError] = useState('');
   const [activeHostTab, setActiveHostTab] = useState<'docker' | 'vps' | 'render' | 'cron'>('docker');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
@@ -41,12 +44,14 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
     e.preventDefault();
     setIsSaving(true);
     setSaveSuccess(false);
+    setSaveError('');
     try {
       await onSaveSettings(formData);
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 3000);
     } catch (err: any) {
-      alert('Error al guardar ajustes: ' + err.message);
+      const msg = extractErrorMessage(err, 'Error al guardar los ajustes');
+      setSaveError(msg);
     } finally {
       setIsSaving(false);
     }
@@ -286,19 +291,27 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           </div>
 
           {/* Submit Button */}
-          <div className="flex items-center justify-end gap-3">
-            {saveSuccess && (
-              <span className="text-xs text-emerald-600 font-semibold flex items-center gap-1">
-                <Check className="w-4 h-4" /> ¡Configuración guardada correctamente!
-              </span>
+          <div className="space-y-2">
+            {saveError && (
+              <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0 text-red-600" />
+                <span>{saveError}</span>
+              </div>
             )}
-            <button
-              type="submit"
-              disabled={isSaving}
-              className="px-5 py-2.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-all cursor-pointer shadow-xs disabled:opacity-50"
-            >
-              {isSaving ? 'Guardando...' : 'Guardar Ajustes'}
-            </button>
+            <div className="flex items-center justify-end gap-3">
+              {saveSuccess && (
+                <span className="text-xs text-emerald-600 font-semibold flex items-center gap-1">
+                  <Check className="w-4 h-4" /> ¡Configuración guardada correctamente!
+                </span>
+              )}
+              <button
+                type="submit"
+                disabled={isSaving}
+                className="px-5 py-2.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-all cursor-pointer shadow-xs disabled:opacity-50"
+              >
+                {isSaving ? 'Guardando...' : 'Guardar Ajustes'}
+              </button>
+            </div>
           </div>
         </form>
 
